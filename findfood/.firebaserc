@@ -6,6 +6,13 @@
           "findfood-faculdadeiv2"
         ]
       }
+    },
+    "findfood-fsnnovais-2021": {
+      "hosting": {
+        "findfood": [
+          "findfood-fsnnovais-2021"
+        ]
+      }
     }
   }
 }

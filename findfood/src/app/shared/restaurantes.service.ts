@@ -18,6 +18,7 @@ export class RestaurantesService {
 
   criaRestaurante(avaliacao: any, fileUpload: any) {
     const restaurantes = this._fireStore.collection('restaurantes');
+    // Operador Spread,o principal objetivo do operador de propagação é espalhar os elementos de uma matriz ou obj
     restaurantes.add({...avaliacao, downloadUrl: fileUpload}).then(doc => doc.update({ id: doc.id }));
   }
 

@@ -28,6 +28,7 @@ export class RestauranteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public restaurante: any,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    // serviço adicionado
     private _restauranteService: RestaurantesService,
   ) { }
 
