@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RestaurantesService } from '../shared/restaurantes.service';
 
+import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-restaurante',
   templateUrl: './restaurante.component.html',
@@ -11,6 +13,7 @@ import { RestaurantesService } from '../shared/restaurantes.service';
 export class RestauranteComponent implements OnInit {
 
   mediaGeral: Array<any> = [];
+  usuarioLogado: any;
 
   ratingArr: Array<number> = [];
   rating: number = 5;
@@ -30,6 +33,7 @@ export class RestauranteComponent implements OnInit {
     public snackBar: MatSnackBar,
     // serviço adicionado
     private _restauranteService: RestaurantesService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +50,11 @@ export class RestauranteComponent implements OnInit {
     }
 
     this.listarComentarios(this.restaurante.estrelas)
+
+    this._authService.user$
+    .subscribe(userInfos => {
+      this.usuarioLogado = userInfos;
+    })
   }
 
   showIcon(contagem: number, index: number) {
@@ -63,14 +72,14 @@ export class RestauranteComponent implements OnInit {
 
   enviarComentario() {
     this._restauranteService
-    .criaComentarioDousuario(this.restaurante.id, 'idprovisorio', {
+    .criaComentarioDousuario(this.restaurante.id, this.usuarioLogado.uid, {
       comentario: this.comentario_usuario,
       estrelas: this.usuario_rating,
       comentadoEm: new Date(),
       autor: {
-        nome: 'bootcamper',
-        foto: '',
-        uid: 'idprovisorio'
+        nome: this.usuarioLogado.displayName,
+        foto: this.usuarioLogado.photoURL,
+        uid: this.usuarioLogado.uid
       }
     }).then(() => this.comentario_usuario = '');
   }

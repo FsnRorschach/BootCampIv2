@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { RestaurantesService } from '../shared/restaurantes.service';
 
 @Component({
@@ -85,7 +85,7 @@ export class NovoRestauranteComponent implements OnInit {
       estado: this.novoRestaurante.value.estado,
       cidade: this.novoRestaurante.value.cidade,
       descricao: this.novoRestaurante.value.descricao,
-      // autorRestaurante: this.data.usuario,
+      autorRestaurante: this.data.usuario,
       criadoEm: new Date(),
       estrelas: this.rating
     }
